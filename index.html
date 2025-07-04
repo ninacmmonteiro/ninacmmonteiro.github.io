@@ -562,9 +562,177 @@
         letter-spacing: 0.1em;
         margin: 0;
       }
+
+      /* Language Toggle */
+      .language-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        display: flex;
+        background: rgba(114, 47, 55, 0.2);
+        border: 1px solid rgba(245, 240, 232, 0.2);
+        border-radius: 50px;
+        padding: 5px;
+        backdrop-filter: blur(10px);
+      }
+
+      .language-toggle button {
+        background: transparent;
+        border: none;
+        color: var(--text-secondary);
+        padding: 8px 16px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border-radius: 50px;
+        font-family: "Crimson Text", serif;
+      }
+
+      .language-toggle button.active {
+        background: var(--bordeaux);
+        color: var(--cream);
+      }
+
+      .language-toggle button:hover:not(.active) {
+        color: var(--cream);
+      }
+      
+      /* Language Toggle - Mobile Responsive */
+      @media (max-width: 768px) {
+        .language-toggle {
+          top: 10px;
+          right: 10px;
+          padding: 3px;
+        }
+
+        .language-toggle button {
+          padding: 4px 8px;
+          font-size: 0.7rem;
+        }
+      }
+
+      /* Social Links */
+      .social-links {
+        display: flex;
+        gap: 20px;
+        margin: 1.5rem 0;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      .social-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(114, 47, 55, 0.1);
+        border: 1px solid rgba(245, 240, 232, 0.2);
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+      
+      .social-link:hover {
+        background: var(--bordeaux);
+        color: var(--cream);
+        border-color: var(--bordeaux);
+        transform: translateY(-2px);
+      }
+      
+      .social-link svg {
+        width: 20px;
+        height: 20px;
+        fill: currentColor;
+      }
+      
+      @media (max-width: 768px) {
+        .social-links {
+          gap: 15px;
+        }
+        
+        .social-link {
+          width: 35px;
+          height: 35px;
+        }
+        
+        .social-link svg {
+          width: 18px;
+          height: 18px;
+        }
+      }
+
+      /* Back to Top Button */
+      .back-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 45px;
+        height: 45px;
+        background: rgba(114, 47, 55, 0.2);
+        border: 1px solid rgba(245, 240, 232, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 999;
+        backdrop-filter: blur(10px);
+      }
+      
+      .back-to-top.visible {
+        opacity: 1;
+        visibility: visible;
+      }
+      
+      .back-to-top:hover {
+        background: var(--bordeaux);
+        border-color: var(--bordeaux);
+        transform: translateY(-3px);
+      }
+      
+      .back-to-top svg {
+        width: 20px;
+        height: 20px;
+        fill: var(--cream);
+      }
+      
+      @media (max-width: 768px) {
+        .back-to-top {
+          bottom: 20px;
+          right: 20px;
+          width: 40px;
+          height: 40px;
+        }
+        
+        .back-to-top svg {
+          width: 18px;
+          height: 18px;
+        }
+      }
     </style>
   </head>
   <body>
+    <!-- Language Toggle -->
+    <div class="language-toggle">
+      <button class="lang-btn active" data-lang="pt">PT</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+    
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
+      </svg>
+    </button>
+    
     <!-- Starry Night Background -->
     <div class="starry-night" id="starryNight"></div>
     
@@ -768,6 +936,27 @@
           <div class="moon-phase full-moon"></div>
           <div class="moon-phase waning-crescent"></div>
         </div>
+        
+        <!-- Social Links -->
+        <div class="social-links">
+          <a href="https://www.instagram.com/ninamonteirodoula" target="_blank" class="social-link" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z"/>
+            </svg>
+          </a>
+          <a href="https://wa.me/5511999999999" target="_blank" class="social-link" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
+          </a>
+          <a href="http://lattes.cnpq.br/1234567890123456" target="_blank" class="social-link" aria-label="Lattes">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+              <path d="M9 11h6v2H9z"/>
+            </svg>
+          </a>
+        </div>
+        
         <p>&copy; 2025 Nina Monteiro. All rights reserved.</p>
       </div>
     </footer>
@@ -1001,6 +1190,267 @@
       
       // Create stars when page loads
       createStarryNight();
+
+      // Translation System
+      const translations = {
+        en: {
+          pageTitle: "Nina Monteiro - Doula",
+          name: "Nina Monteiro",
+          subtitle: "Doula",
+          tagline: "Support Through Pregnancy, Birth & Beyond",
+          description: "Welcome. My name is Nina Monteiro, and I am a certified, full-spectrum doula offering compassionate support to mothers and families.",
+          ctaButton: "Get In Touch",
+          
+          // Section headers
+          aboutTitle: "About Me",
+          servicesTitle: "Services Offered",
+          resourcesTitle: "Helpful Resources", 
+          contactTitle: "Get in Touch",
+          
+          // About section
+          aboutText1: "As a certified full-spectrum doula, I believe in the power of informed choice and compassionate care throughout your pregnancy journey. My approach centers on creating a safe, supportive environment where you feel empowered to make decisions that align with your values and birth preferences.",
+          aboutText2: "I provide evidence-based information, emotional support, and advocacy to help you navigate this transformative time with confidence. Whether you're planning a hospital birth, home birth, or anything in between, I'm here to support your unique path to parenthood.",
+          
+          // Services
+          service1Title: "Birth Support",
+          service1Text: "Continuous emotional, physical, and informational support during labor and delivery. I help create a calm, supportive environment while advocating for your birth preferences.",
+          service2Title: "Prenatal Education",
+          service2Text: "Comprehensive childbirth education, birth planning sessions, and resources to help you prepare for your birthing experience with confidence and knowledge.",
+          service3Title: "Postpartum Care",
+          service3Text: "Support during the fourth trimester including newborn care guidance, emotional support, and resources for your recovery and adjustment to parenthood.",
+          service4Title: "Lactation Support",
+          service4Text: "Guidance and support for breastfeeding success, including proper latch techniques, positioning, and troubleshooting common challenges.",
+          
+          // Resources
+          resource1Title: "Evidence-Based Care",
+          resource1Text: "Research and studies supporting informed decision-making during pregnancy and birth.",
+          resource1Link: "Learn More →",
+          resource2Title: "Birth Preferences",
+          resource2Text: "Tools and resources to help you articulate your birth wishes and preferences.",
+          resource2Link: "Create Your Plan →",
+          resource3Title: "Comfort Measures",
+          resource3Text: "Natural pain management techniques and comfort strategies for labor.",
+          resource3Link: "Explore Techniques →",
+          resource4Title: "Partner Preparation",
+          resource4Text: "Guidance for partners on how to provide meaningful support during birth.",
+          resource4Link: "Support Guide →",
+          resource5Title: "Newborn Care",
+          resource5Text: "Essential information about caring for your newborn in the early days and weeks.",
+          resource5Link: "Care Guide →",
+          resource6Title: "Community",
+          resource6Text: "Connect with other families and find local support networks.",
+          resource6Link: "Find Support →",
+          
+          // Contact form
+          formNameLabel: "Full Name",
+          formNamePlaceholder: "Your full name",
+          formEmailLabel: "Email Address",
+          formEmailPlaceholder: "your.email@example.com",
+          formDueDateLabel: "Expected Due Date (Optional)",
+          formMessageLabel: "How can I support you?",
+          formMessagePlaceholder: "Tell me about your needs, due date, birth preferences, or any questions you have...",
+          formSubmitButton: "Send Message",
+          
+          // Footer
+          footerText: "© 2025 Nina Monteiro. All rights reserved."
+        },
+        pt: {
+          pageTitle: "Nina Monteiro - Doula",
+          name: "Nina Monteiro",
+          subtitle: "Doula",
+          tagline: "Apoio Durante a Gravidez, Parto e Além",
+          description: "Bem-vinda. Meu nome é Nina Monteiro, e sou uma doula certificada de espectro completo, oferecendo apoio compassivo a mães e famílias.",
+          ctaButton: "Entre em Contato",
+          
+          // Section headers
+          aboutTitle: "Sobre Mim",
+          servicesTitle: "Serviços Oferecidos",
+          resourcesTitle: "Recursos Úteis",
+          contactTitle: "Entre em Contato",
+          
+          // About section
+          aboutText1: "Como doula certificada de espectro completo, acredito no poder da escolha informada e do cuidado compassivo durante toda a sua jornada de gravidez. Minha abordagem se concentra em criar um ambiente seguro e de apoio onde você se sinta empoderada para tomar decisões alinhadas com seus valores e preferências de parto.",
+          aboutText2: "Forneço informações baseadas em evidências, apoio emocional e defesa para ajudá-la a navegar neste momento transformador com confiança. Seja planejando um parto hospitalar, parto domiciliar ou qualquer coisa intermediária, estou aqui para apoiar seu caminho único para a maternidade.",
+          
+          // Services
+          service1Title: "Apoio ao Parto",
+          service1Text: "Apoio emocional, físico e informacional contínuo durante o trabalho de parto e nascimento. Ajudo a criar um ambiente calmo e de apoio enquanto defendo suas preferências de parto.",
+          service2Title: "Educação Pré-natal",
+          service2Text: "Educação abrangente sobre o parto, sessões de planejamento do nascimento e recursos para ajudá-la a se preparar para sua experiência de parto com confiança e conhecimento.",
+          service3Title: "Cuidados Pós-parto",
+          service3Text: "Apoio durante o quarto trimestre, incluindo orientação sobre cuidados com o recém-nascido, apoio emocional e recursos para sua recuperação e adaptação à maternidade.",
+          service4Title: "Apoio à Amamentação",
+          service4Text: "Orientação e apoio para o sucesso da amamentação, incluindo técnicas adequadas de pega, posicionamento e resolução de desafios comuns.",
+          
+          // Resources
+          resource1Title: "Cuidados Baseados em Evidências",
+          resource1Text: "Pesquisas e estudos que apoiam a tomada de decisões informadas durante a gravidez e o parto.",
+          resource1Link: "Saiba Mais →",
+          resource2Title: "Preferências de Parto",
+          resource2Text: "Ferramentas e recursos para ajudá-la a articular seus desejos e preferências de parto.",
+          resource2Link: "Crie Seu Plano →",
+          resource3Title: "Medidas de Conforto",
+          resource3Text: "Técnicas naturais de manejo da dor e estratégias de conforto para o trabalho de parto.",
+          resource3Link: "Explore Técnicas →",
+          resource4Title: "Preparação do Parceiro",
+          resource4Text: "Orientação para parceiros sobre como fornecer apoio significativo durante o parto.",
+          resource4Link: "Guia de Apoio →",
+          resource5Title: "Cuidados com o Recém-nascido",
+          resource5Text: "Informações essenciais sobre o cuidado do seu recém-nascido nos primeiros dias e semanas.",
+          resource5Link: "Guia de Cuidados →",
+          resource6Title: "Comunidade",
+          resource6Text: "Conecte-se com outras famílias e encontre redes de apoio locais.",
+          resource6Link: "Encontre Apoio →",
+          
+          // Contact form
+          formNameLabel: "Nome Completo",
+          formNamePlaceholder: "Seu nome completo",
+          formEmailLabel: "Endereço de E-mail",
+          formEmailPlaceholder: "seu.email@exemplo.com",
+          formDueDateLabel: "Data Prevista do Parto (Opcional)",
+          formMessageLabel: "Como posso apoiá-la?",
+          formMessagePlaceholder: "Conte-me sobre suas necessidades, data prevista, preferências de parto ou quaisquer perguntas que você tenha...",
+          formSubmitButton: "Enviar Mensagem",
+          
+          // Footer
+          footerText: "© 2025 Nina Monteiro. Todos os direitos reservados."
+        }
+      };
+
+      // Get current language from localStorage or default to 'pt'
+      let currentLang = localStorage.getItem('selectedLanguage') || 'pt';
+
+      // Function to update all text content
+      function updateContent(lang) {
+        const t = translations[lang];
+        
+        // Update page title
+        document.title = t.pageTitle;
+        
+        // Update splash section
+        const splashSection = document.querySelector('.splash');
+        splashSection.querySelector('h1').textContent = t.name;
+        splashSection.querySelector('.subtitle').textContent = t.subtitle;
+        splashSection.querySelector('.tagline').textContent = t.tagline;
+        splashSection.querySelector('.description').textContent = t.description;
+        splashSection.querySelector('.cta-button').textContent = t.ctaButton;
+        
+        // Update section titles
+        document.querySelector('.about h2').textContent = t.aboutTitle;
+        document.querySelector('.services h2').textContent = t.servicesTitle;
+        document.querySelector('.resources h2').textContent = t.resourcesTitle;
+        document.querySelector('.contact h2').textContent = t.contactTitle;
+        
+        // Update about section
+        const aboutParagraphs = document.querySelectorAll('.about-content p');
+        aboutParagraphs[0].textContent = t.aboutText1;
+        aboutParagraphs[1].textContent = t.aboutText2;
+        
+        // Update services
+        const serviceCards = document.querySelectorAll('.service-card');
+        serviceCards[0].querySelector('h3').textContent = t.service1Title;
+        serviceCards[0].querySelector('p').textContent = t.service1Text;
+        serviceCards[1].querySelector('h3').textContent = t.service2Title;
+        serviceCards[1].querySelector('p').textContent = t.service2Text;
+        serviceCards[2].querySelector('h3').textContent = t.service3Title;
+        serviceCards[2].querySelector('p').textContent = t.service3Text;
+        serviceCards[3].querySelector('h3').textContent = t.service4Title;
+        serviceCards[3].querySelector('p').textContent = t.service4Text;
+        
+        // Update resources
+        const resourceCards = document.querySelectorAll('.resource-card');
+        resourceCards[0].querySelector('h3').textContent = t.resource1Title;
+        resourceCards[0].querySelector('p').textContent = t.resource1Text;
+        resourceCards[0].querySelector('a').textContent = t.resource1Link;
+        resourceCards[1].querySelector('h3').textContent = t.resource2Title;
+        resourceCards[1].querySelector('p').textContent = t.resource2Text;
+        resourceCards[1].querySelector('a').textContent = t.resource2Link;
+        resourceCards[2].querySelector('h3').textContent = t.resource3Title;
+        resourceCards[2].querySelector('p').textContent = t.resource3Text;
+        resourceCards[2].querySelector('a').textContent = t.resource3Link;
+        resourceCards[3].querySelector('h3').textContent = t.resource4Title;
+        resourceCards[3].querySelector('p').textContent = t.resource4Text;
+        resourceCards[3].querySelector('a').textContent = t.resource4Link;
+        resourceCards[4].querySelector('h3').textContent = t.resource5Title;
+        resourceCards[4].querySelector('p').textContent = t.resource5Text;
+        resourceCards[4].querySelector('a').textContent = t.resource5Link;
+        resourceCards[5].querySelector('h3').textContent = t.resource6Title;
+        resourceCards[5].querySelector('p').textContent = t.resource6Text;
+        resourceCards[5].querySelector('a').textContent = t.resource6Link;
+        
+        // Update contact form
+        const form = document.getElementById('contactForm');
+        form.querySelector('label[for="name"]').textContent = t.formNameLabel;
+        form.querySelector('#name').placeholder = t.formNamePlaceholder;
+        form.querySelector('label[for="email"]').textContent = t.formEmailLabel;
+        form.querySelector('#email').placeholder = t.formEmailPlaceholder;
+        form.querySelector('label[for="due-date"]').textContent = t.formDueDateLabel;
+        form.querySelector('label[for="message"]').textContent = t.formMessageLabel;
+        form.querySelector('#message').placeholder = t.formMessagePlaceholder;
+        form.querySelector('.submit-btn').textContent = t.formSubmitButton;
+        
+        // Update footer
+        document.querySelector('footer p').textContent = t.footerText;
+        
+        // Update active language button
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+          btn.classList.remove('active');
+          if (btn.dataset.lang === lang) {
+            btn.classList.add('active');
+          }
+        });
+        
+        // Store language preference
+        localStorage.setItem('selectedLanguage', lang);
+        currentLang = lang;
+      }
+
+      // Initialize with current language
+      updateContent(currentLang);
+
+      // Add language toggle event listeners
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const selectedLang = this.dataset.lang;
+          updateContent(selectedLang);
+        });
+      });
+
+      // Back to Top Button Functionality
+      const backToTopButton = document.getElementById('backToTop');
+      
+      // Show/hide button based on scroll position
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+          backToTopButton.classList.add('visible');
+        } else {
+          backToTopButton.classList.remove('visible');
+        }
+      });
+      
+      // Smooth scroll to top when clicked
+      backToTopButton.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+      
+      // Update button aria-label based on language
+      function updateBackToTopLabel(lang) {
+        const label = lang === 'pt' ? 'Voltar ao topo' : 'Back to top';
+        backToTopButton.setAttribute('aria-label', label);
+      }
+      
+      // Add to the updateContent function
+      const originalUpdateContent = updateContent;
+      updateContent = function(lang) {
+        originalUpdateContent(lang);
+        updateBackToTopLabel(lang);
+      };
+      
+      // Initialize label with current language
+      updateBackToTopLabel(currentLang);
     </script>
   </body>
 </html>
