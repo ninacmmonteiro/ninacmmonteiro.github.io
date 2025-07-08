@@ -1,0 +1,15 @@
+/* TEAM */
+Developer & Designer: Zachary Bolton (Zac)
+Site: https://zacbolton.io
+Location: Juiz de Fora, MG, Brazil
+Note: Crafted with love for my wife's practice
+
+/* THANKS */
+Nina Monteiro - For trusting me with your vision and being an inspiring doula
+
+/* SITE */
+Last update: 2025/01
+Language: Portuguese / English
+Standards: HTML5, CSS3, JavaScript ES6
+Components: Vanilla JavaScript, Google Fonts, Material Icons
+Tools: Visual Studio Code, Git 

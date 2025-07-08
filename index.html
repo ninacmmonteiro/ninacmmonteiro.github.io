@@ -1,9 +1,44 @@
 <!doctype html>
-<html lang="en">
+<!--
+  Site desenvolvido por Zachary Bolton (Zac) para Nina Monteiro
+  Um projeto feito com carinho para minha parceira
+  Portfolio: https://zacbolton.io
+  
+  Website developed by Zachary Bolton (Zac) for Nina Monteiro
+  A project crafted with love for my partner
+  Portfolio: https://zacbolton.io
+-->
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nina Monteiro - Doula</title>
+    
+    <!-- Developer Attribution -->
+    <meta name="developer" content="Zachary Bolton" />
+    <meta name="developer-url" content="https://zacbolton.io" />
+    <meta name="designer" content="Zachary Bolton" />
+    
+    <!-- Site Info -->
+    <meta name="author" content="Nina Monteiro" />
+    <meta name="description" content="Nina Monteiro - Doula e educadora perinatal oferecendo apoio a gestantes e familiares. Serviços de acompanhamento durante gestação, parto e pós-parto." />
+    <meta name="keywords" content="doula, gestação, parto, pós-parto, apoio perinatal, Nina Monteiro" />
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Nina Monteiro - Doula" />
+    <meta property="og:description" content="Apoio especializado para gestantes e famílias durante gestação, parto e pós-parto." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ninamonteiro.com" />
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Nina Monteiro - Doula" />
+    <meta name="twitter:description" content="Apoio especializado para gestantes e famílias durante gestação, parto e pós-parto." />
+    
+    <!-- Humans.txt -->
+    <link rel="author" href="humans.txt" />
+    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
       * {
         margin: 0;
@@ -257,51 +292,259 @@
         font-size: 1.2rem;
         line-height: 1.8;
         color: var(--text-secondary);
+        position: relative;
       }
 
-      /* Services Carousel */
+      .about-photo {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: center;
+        border: 3px solid rgba(245, 240, 232, 0.2);
+        box-shadow: 0 0 30px rgba(114, 47, 55, 0.3);
+        margin: 0 auto 2rem;
+        display: block;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .about-photo:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 40px rgba(114, 47, 55, 0.4);
+        border-color: rgba(245, 240, 232, 0.3);
+      }
+
+      .about-photo::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 30% 30%, rgba(245, 240, 232, 0.1), transparent 50%);
+        z-index: -1;
+      }
+
+      @media (min-width: 768px) {
+        .about-content {
+          display: flex;
+          align-items: center;
+          gap: 3rem;
+          text-align: left;
+          max-width: 900px;
+        }
+        
+        .about-photo {
+          flex-shrink: 0;
+          margin: 0;
+          width: 250px;
+          height: 250px;
+        }
+        
+        .about-text {
+          flex: 1;
+        }
+      }
+
+      /* Services Grid */
       .services-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 2rem;
-        max-width: 1000px;
+        gap: 1.5rem;
+        max-width: 1200px;
         margin: 0 auto;
       }
 
+      /* Responsive grid layouts */
+      @media (min-width: 1200px) {
+        .services-grid {
+          grid-template-columns: repeat(6, 1fr);
+        }
+        
+        .service-card {
+          grid-column: span 2;
+        }
+
+        /* Center the last two cards */
+        .service-card:nth-child(4) {
+          grid-column: 2 / 4;
+        }
+        
+        .service-card:nth-child(5) {
+          grid-column: 4 / 6;
+        }
+      }
+
+      @media (min-width: 768px) and (max-width: 1199px) {
+        .services-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .service-card:last-child {
+          grid-column: 1 / -1;
+          max-width: 50%;
+          margin: 0 auto;
+        }
+      }
+
+      @media (max-width: 767px) {
+        .services-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
       .service-card {
-        background: rgba(114, 47, 55, 0.1);
+        background: rgba(114, 47, 55, 0.08);
         border: 1px solid rgba(245, 240, 232, 0.1);
-        border-radius: 10px;
+        border-radius: 15px;
         padding: 2rem;
-        text-align: center;
         transition: all 0.3s ease;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        text-align: center;
       }
 
       .service-card:hover {
-        transform: translateY(-5px);
+        transform: translateY(-3px);
+        background: rgba(114, 47, 55, 0.12);
+        border-color: rgba(245, 240, 232, 0.2);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      .service-card.expanded {
         background: rgba(114, 47, 55, 0.15);
+        border-color: var(--bordeaux);
+      }
+
+      .service-icon {
+        width: 60px;
+        height: 60px;
+        margin: 0 auto 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(245, 240, 232, 0.08);
+        border-radius: 50%;
+        transition: all 0.3s ease;
+      }
+
+      .service-card:hover .service-icon {
+        background: rgba(245, 240, 232, 0.12);
+        transform: scale(1.1);
+      }
+
+      .service-icon .material-icons {
+        font-size: 32px;
+        color: var(--cream);
+        opacity: 0.8;
       }
 
       .service-card h3 {
         font-family: "Playfair Display", serif;
-        font-size: 1.5rem;
+        font-size: 1.4rem;
         font-weight: 600;
-        margin-bottom: 1rem;
+        margin-bottom: 0.8rem;
         color: var(--cream);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
       }
 
-      .service-card p {
-        font-size: 1rem;
+      .expand-icon {
+        font-size: 18px;
+        color: var(--text-secondary);
+        transition: transform 0.3s ease;
+        flex-shrink: 0;
+      }
+
+      .service-card.expanded .expand-icon {
+        transform: rotate(180deg);
+      }
+
+      .service-content {
+        overflow: hidden;
+        position: relative;
+      }
+
+      .service-preview {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: var(--text-secondary);
+        margin-bottom: 0.5rem;
+      }
+
+      .service-full {
+        font-size: 0.95rem;
         line-height: 1.7;
         color: var(--text-secondary);
+        max-height: 0;
+        opacity: 0;
+        transition: all 0.4s ease;
+        overflow: hidden;
+      }
+
+      .service-card.expanded .service-full {
+        max-height: 300px;
+        opacity: 1;
+        margin-top: 1rem;
+      }
+
+      .service-card.expanded .service-preview {
+        display: none;
+      }
+
+      .read-more {
+        color: var(--bordeaux);
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-top: 0.5rem;
+        display: inline-block;
+        transition: color 0.3s ease;
+      }
+
+      .service-card:hover .read-more {
+        color: var(--light-bordeaux);
+      }
+
+      .service-card.expanded .read-more {
+        display: none;
       }
 
       /* Resources */
       .resources-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 2rem;
+        gap: 1.5rem;
         margin-top: 2rem;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      @media (min-width: 1200px) {
+        .resources-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .resource-card:last-child {
+          grid-column: 1 / -1;
+          max-width: calc(33.33% - 1rem);
+          margin: 0 auto;
+        }
+      }
+
+      @media (min-width: 768px) and (max-width: 1199px) {
+        .resources-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 767px) {
+        .resources-grid {
+          grid-template-columns: 1fr;
+        }
       }
 
       .resource-card {
@@ -538,6 +781,7 @@
       }
       
       footer .container {
+        max-width: unset;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -561,6 +805,48 @@
         font-size: 0.9rem;
         letter-spacing: 0.1em;
         margin: 0;
+      }
+      
+      /* Developer Credit */
+      .developer-credit {
+        margin-top: 1rem;
+        font-size: 0.6rem;
+        opacity: 0.5;
+        transition: opacity 0.3s ease;
+        align-self: baseline;
+      }
+      
+      .developer-credit:hover {
+        opacity: 1;
+      }
+      
+      .developer-credit .credit-text {
+        color: var(--text-secondary);
+      }
+      
+      .developer-credit .heart {
+        color: var(--bordeaux);
+        font-size: 0.7rem;
+        margin: 0 0.25rem;
+        display: inline-block;
+        animation: heartbeat 2s ease-in-out infinite;
+      }
+      
+      .developer-credit a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition: all 0.3s ease;
+      }
+      
+      .developer-credit a:hover {
+        color: var(--cream);
+        border-bottom-color: var(--bordeaux);
+      }
+      
+      @keyframes heartbeat {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.3); }
       }
 
       /* Language Toggle */
@@ -727,7 +1013,7 @@
     </div>
     
     <!-- Back to Top Button -->
-    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
       </svg>
@@ -750,40 +1036,34 @@
         <div class="hero-illustration" id="heroIllustration">
           <!-- SVGs will be injected here by JavaScript -->
         </div>
-        <p class="tagline">Support Through Pregnancy, Birth & Beyond</p>
+        <p class="tagline">Apoio à Gestantes e Familiares</p>
         <p class="description">
-          Welcome. My name is Nina Monteiro, and I am a certified, full-spectrum
-          doula offering compassionate support to mothers and families.
+          Bem vindas! Sou doula e educadora perinatal. Ofereço apoio à gestantes e familiares nos primeiros momentos de recém nascido.
         </p>
-        <a href="#contact" class="cta-button">Get In Touch</a>
+        <a href="#contact" class="cta-button">Entre em Contato</a>
       </div>
     </section>
 
     <!-- About Section -->
     <section class="about">
       <div class="container">
-        <h2 class="fade-in">About Me</h2>
+        <h2 class="fade-in">Sobre Mim</h2>
         <div class="section-moon-phases">
           <div class="moon-phase waxing-crescent"></div>
           <div class="moon-phase full-moon"></div>
           <div class="moon-phase waning-crescent"></div>
         </div>
         <div class="about-content fade-in">
-          <p>
-            As a certified full-spectrum doula, I believe in the power of
-            informed choice and compassionate care throughout your pregnancy
-            journey. My approach centers on creating a safe, supportive
-            environment where you feel empowered to make decisions that align
-            with your values and birth preferences.
-          </p>
-          <br />
-          <p>
-            I provide evidence-based information, emotional support, and
-            advocacy to help you navigate this transformative time with
-            confidence. Whether you're planning a hospital birth, home birth, or
-            anything in between, I'm here to support your unique path to
-            parenthood.
-          </p>
+          <img src="assets/nina.jpg" alt="Nina Monteiro com seu filho Ben" class="about-photo fade-in" />
+          <div class="about-text">
+            <p>
+              Como doula, acredito no poder da escolha bem informada e do cuidado afetivo durante a sua gravidez. Minha abordagem se concentra em criar um ambiente seguro e de apoio onde você se sinta empoderada para tomar decisões alinhadas com seus valores e preferências de parto.
+            </p>
+            <br />
+            <p>
+              Forneço informações atualizadas, baseadas em evidências, apoio emocional e escuta ativa para ajudá-la a navegar neste momento transformador com confiança. Seja planejando um parto hospitalar ou parto domiciliar, estou aqui para apoiar sua jornada à parentalidade.
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -791,93 +1071,138 @@
     <!-- Services Section -->
     <section class="services">
       <div class="container">
-        <h2 class="fade-in">Services Offered</h2>
+        <h2 class="fade-in">Serviços Oferecidos</h2>
         <div class="services-grid fade-in">
           <div class="service-card">
-            <h3>Birth Support</h3>
-            <p>
-              Continuous emotional, physical, and informational support during
-              labor and delivery. I help create a calm, supportive environment
-              while advocating for your birth preferences.
-            </p>
+            <div class="service-icon">
+              <span class="material-icons">pregnant_woman</span>
+            </div>
+            <h3>
+              Pacote Gestação+Parto
+              <span class="material-icons expand-icon">expand_more</span>
+            </h3>
+            <div class="service-content">
+              <p class="service-preview">
+                Acompanhamento completo durante gestação e parto, com encontros personalizados para entender seus desejos e alinhar expectativas.
+              </p>
+              <p class="service-full">
+                Aqui será oferecido um pacote de encontros que acontecerão ainda durante a gestação, para nos conhecermos melhor, para que eu possa entender seus desejos para o parto e também para alinharmos expectativas. Podemos elaborar um pacote que sirva melhor à você, mas o plano básico serão de 4 encontros durante a gestação, acompanhamento do parto e um encontro no pós parto.
+              </p>
+              <span class="read-more">Saiba mais</span>
+            </div>
           </div>
           <div class="service-card">
-            <h3>Prenatal Education</h3>
-            <p>
-              Comprehensive childbirth education, birth planning sessions, and
-              resources to help you prepare for your birthing experience with
-              confidence and knowledge.
-            </p>
+            <div class="service-icon">
+              <span class="material-icons">child_care</span>
+            </div>
+            <h3>
+              Pacote Doula+
+              <span class="material-icons expand-icon">expand_more</span>
+            </h3>
+            <div class="service-content">
+              <p class="service-preview">
+                Apoio completo no pós-parto, incluindo cuidados da casa, alimentação e suporte na amamentação.
+              </p>
+              <p class="service-full">
+                Aqui os serviços ofertados são variados, visando um amplo apoio à pessoa em pós parto. Serei sua rede de apoio para que você possa se dedicar ao cuidado do bebê e de si mesma. Te ajudarei com os cuidados da casa, alimentação, companhia e higiene sua e do bebê nesses primeiros momentos. Ofereço auxílio também na amamentação, caso esse seja seu desejo, e, se necessário, oriento para profissionais especializados.
+              </p>
+              <span class="read-more">Saiba mais</span>
+            </div>
           </div>
           <div class="service-card">
-            <h3>Postpartum Care</h3>
-            <p>
-              Support during the fourth trimester including newborn care
-              guidance, emotional support, and resources for your recovery and
-              adjustment to parenthood.
-            </p>
+            <div class="service-icon">
+              <span class="material-icons">diversity_3</span>
+            </div>
+            <h3>
+              Famílias LGBTQIA+
+              <span class="material-icons expand-icon">expand_more</span>
+            </h3>
+            <div class="service-content">
+              <p class="service-preview">
+                Serviços inclusivos para todas as famílias, com atenção especial às necessidades de pessoas LGBTQIA+.
+              </p>
+              <p class="service-full">
+                Os meus serviços são disponíveis para qualquer pessoa que gesta e/ou adota, com um olhar atento e cuidadoso para famílias LGBTQIA+. Dentro do meu escopo, ofereço apoio a pessoas trans que desejam parir e amamentar, com um olhar atualizado para as particularidades de cada família, também com orientação para profissionais especializados, quando necessário.
+              </p>
+              <span class="read-more">Saiba mais</span>
+            </div>
           </div>
           <div class="service-card">
-            <h3>Lactation Support</h3>
-            <p>
-              Guidance and support for breastfeeding success, including proper
-              latch techniques, positioning, and troubleshooting common
-              challenges.
-            </p>
+            <div class="service-icon">
+              <span class="material-icons">volunteer_activism</span>
+            </div>
+            <h3>
+              Doula Solidária
+              <span class="material-icons expand-icon">expand_more</span>
+            </h3>
+            <div class="service-content">
+              <p class="service-preview">
+                Acompanhamento acessível para mulheres pretas, indígenas ou de baixa renda.
+              </p>
+              <p class="service-full">
+                Se você é uma mulher preta, indígena ou baixa renda e deseja acompanhamento para qualquer dos serviços acima, entre em contato que oferecemos os serviços por preços simbólicos.
+              </p>
+              <span class="read-more">Saiba mais</span>
+            </div>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <span class="material-icons">groups</span>
+            </div>
+            <h3>
+              Doula | Clube
+              <span class="material-icons expand-icon">expand_more</span>
+            </h3>
+            <div class="service-content">
+              <p class="service-preview">
+                Orientação e acolhimento em grupo para até 5 pessoas, promovendo troca de experiências.
+              </p>
+              <p class="service-full">
+                Serviços de orientação e acolhimento para grupo de até 5 pessoas. Uma experiência diferente, em que a troca e o grupo são a base do serviço, mas com orientações claras e olhar aguçado.
+              </p>
+              <span class="read-more">Saiba mais</span>
+            </div>
           </div>
         </div>
+        <p style="text-align: center; margin-top: 2rem; color: var(--text-secondary); font-style: italic;">
+          *Em todos os pacotes, há suporte e acompanhamento via WhatsApp diretamente comigo, ou com grupos de discussão, no caso do Doula|Clube.
+        </p>
       </div>
     </section>
 
     <!-- Resources Section -->
     <section class="resources">
       <div class="container">
-        <h2 class="fade-in">Helpful Resources</h2>
+        <h2 class="fade-in">Links Úteis</h2>
         <div class="resources-grid">
           <div class="resource-card fade-in">
-            <h3>Evidence-Based Care</h3>
+            <h3>Vídeo Educativo: Preparação para o Parto</h3>
             <p>
-              Research and studies supporting informed decision-making during
-              pregnancy and birth.
+              Informações importantes sobre o processo de parto e nascimento para uma experiência mais tranquila e consciente.
             </p>
-            <a href="#" target="_blank">Learn More →</a>
+            <a href="https://www.youtube.com/watch?v=Q9G5uyRKsyk&t=296s" target="_blank">Assistir no YouTube →</a>
           </div>
           <div class="resource-card fade-in">
-            <h3>Birth Preferences</h3>
+            <h3>Vídeo: Cuidados e Apoio</h3>
             <p>
-              Tools and resources to help you articulate your birth wishes and
-              preferences.
+              Conteúdo educativo sobre o papel da doula e a importância do apoio durante a gestação e parto.
             </p>
-            <a href="#" target="_blank">Create Your Plan →</a>
+            <a href="https://www.youtube.com/watch?v=cZFB2KEb2xE" target="_blank">Assistir no YouTube →</a>
           </div>
           <div class="resource-card fade-in">
-            <h3>Comfort Measures</h3>
+            <h3>Estudo: Lacerações Perineais no Brasil</h3>
             <p>
-              Natural pain management techniques and comfort strategies for
-              labor.
+              Pesquisa científica sobre fatores associados à percepção de laceração perineal, com dados da pesquisa Nascer no Brasil.
             </p>
-            <a href="#" target="_blank">Explore Techniques →</a>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/38597528/" target="_blank">Ler Artigo →</a>
           </div>
+
           <div class="resource-card fade-in">
-            <h3>Partner Preparation</h3>
+            <h3>Pesquisa Nascer no Brasil</h3>
             <p>
-              Guidance for partners on how to provide meaningful support during
-              birth.
+              Sumário executivo da maior pesquisa sobre parto e nascimento realizada no Brasil, com dados importantes sobre a assistência obstétrica.
             </p>
-            <a href="#" target="_blank">Support Guide →</a>
-          </div>
-          <div class="resource-card fade-in">
-            <h3>Newborn Care</h3>
-            <p>
-              Essential information about caring for your newborn in the early
-              days and weeks.
-            </p>
-            <a href="#" target="_blank">Care Guide →</a>
-          </div>
-          <div class="resource-card fade-in">
-            <h3>Community</h3>
-            <p>Connect with other families and find local support networks.</p>
-            <a href="#" target="_blank">Find Support →</a>
+            <a href="https://nascernobrasil.ensp.fiocruz.br/wp-content/uploads/2020/05/Sumário-executivo-I.pdf" target="_blank">Baixar PDF →</a>
           </div>
         </div>
       </div>
@@ -886,43 +1211,43 @@
     <!-- Contact Section -->
     <section class="contact" id="contact">
       <div class="container">
-        <h2 class="fade-in">Get in Touch</h2>
+        <h2 class="fade-in">Entre em Contato</h2>
         <form class="contact-form fade-in" id="contactForm" action="https://formspree.io/f/mblybbjo" method="POST">
           <div class="form-group">
-            <label for="name">Full Name</label>
+            <label for="name">Nome Completo</label>
             <input
               type="text"
               id="name"
               name="name"
-              placeholder="Your full name"
+              placeholder="Seu nome completo"
               required
             />
           </div>
           <div class="form-group">
-            <label for="email">Email Address</label>
+            <label for="email">Endereço de E-mail</label>
             <input
               type="email"
               id="email"
               name="email"
-              placeholder="your.email@example.com"
+              placeholder="seu.email@exemplo.com"
               required
             />
           </div>
           <div class="form-group">
-            <label for="due-date">Expected Due Date (Optional)</label>
+            <label for="due-date">Data Prevista do Parto (Opcional)</label>
             <input type="date" id="due-date" name="due-date" />
           </div>
           <div class="form-group">
-            <label for="message">How can I support you?</label>
+            <label for="message">Como posso apoiá-la?</label>
             <textarea
               id="message"
               name="message"
               rows="5"
-              placeholder="Tell me about your needs, due date, birth preferences, or any questions you have..."
+              placeholder="Conte-me sobre suas necessidades, data prevista, preferências de parto ou quaisquer perguntas que você tenha..."
               required
             ></textarea>
           </div>
-          <button type="submit" class="submit-btn">Send Message</button>
+          <button type="submit" class="submit-btn">Enviar Mensagem</button>
         </form>
       </div>
     </section>
@@ -939,29 +1264,38 @@
         
         <!-- Social Links -->
         <div class="social-links">
-          <a href="https://www.instagram.com/ninamonteirodoula" target="_blank" class="social-link" aria-label="Instagram">
+          <a href="https://www.instagram.com/nina.monteiro/" target="_blank" class="social-link" aria-label="Instagram">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z"/>
             </svg>
           </a>
-          <a href="https://wa.me/5511999999999" target="_blank" class="social-link" aria-label="WhatsApp">
+          <a href="https://wa.me/5532991024891" target="_blank" class="social-link" aria-label="WhatsApp">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
             </svg>
           </a>
-          <a href="http://lattes.cnpq.br/1234567890123456" target="_blank" class="social-link" aria-label="Lattes">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
-              <path d="M9 11h6v2H9z"/>
-            </svg>
+          <a href="http://lattes.cnpq.br/9707985637670859" target="_blank" class="social-link" aria-label="Lattes">
+            <img src="assets/lattes_icon.svg" alt="Lattes" />
           </a>
         </div>
         
-        <p>&copy; 2025 Nina Monteiro. All rights reserved.</p>
+        <p>&copy; 2025 Nina Monteiro. Todos os direitos reservados.</p>
+        <p class="developer-credit">
+          <span class="credit-text">Desenvolvido com</span>
+          <span class="heart">♥</span>
+          <span class="credit-text">por</span>
+          <a href="https://zacbolton.io" target="_blank" rel="noopener">Zac Bolton</a>
+        </p>
       </div>
     </footer>
 
     <script type="module">
+      // Developer signature
+      console.log('%c👨‍💻 Desenvolvido por Zachary Bolton', 'font-size: 14px; color: #722f37; font-weight: bold;');
+      console.log('%c🌐 Portfolio: https://zacbolton.io', 'font-size: 12px; color: #8b4049;');
+      console.log('%c💑 Um projeto especial para minha esposa, Nina Monteiro', 'font-size: 12px; color: #d4af37;');
+      console.log('%c💫 Feito com amor e atenção aos detalhes', 'font-size: 12px; color: #8b4049;');
+      
       // Import hero images
       import { createHeroImage1 } from './heroImage1.js';
       import { createHeroImage2 } from './heroImage2.js';
@@ -1059,7 +1393,18 @@
           const originalText = submitBtn.textContent;
           const data = new FormData(form);
 
-          submitBtn.textContent = "Sending...";
+          // Get appropriate messages based on current language
+          const messages = currentLang === 'en' ? {
+            sending: translations.en.formSending,
+            success: translations.en.formSuccess,
+            error: translations.en.formError
+          } : {
+            sending: "Enviando...",
+            success: "Mensagem Enviada!",
+            error: "Erro! Por favor, tente novamente."
+          };
+
+          submitBtn.textContent = messages.sending;
           submitBtn.disabled = true;
 
           try {
@@ -1072,7 +1417,7 @@
             });
 
             if (response.ok) {
-              submitBtn.textContent = "Message Sent!";
+              submitBtn.textContent = messages.success;
               form.reset();
               
               // Show success message
@@ -1084,10 +1429,10 @@
               // Handle errors
               const responseData = await response.json();
               if (responseData.errors) {
-                submitBtn.textContent = "Error! Please try again.";
+                submitBtn.textContent = messages.error;
                 console.error('Form errors:', responseData.errors);
               } else {
-                submitBtn.textContent = "Error! Please try again.";
+                submitBtn.textContent = messages.error;
               }
               
               setTimeout(() => {
@@ -1097,7 +1442,7 @@
             }
           } catch (error) {
             console.error('Submission error:', error);
-            submitBtn.textContent = "Error! Please try again.";
+            submitBtn.textContent = messages.error;
             
             setTimeout(() => {
               submitBtn.textContent = originalText;
@@ -1191,14 +1536,31 @@
       // Create stars when page loads
       createStarryNight();
 
+      // Service Cards Expand/Collapse Functionality
+      const serviceCards = document.querySelectorAll('.service-card');
+      
+      serviceCards.forEach(card => {
+        card.addEventListener('click', function() {
+          // Toggle expanded class
+          this.classList.toggle('expanded');
+          
+          // Close other cards
+          serviceCards.forEach(otherCard => {
+            if (otherCard !== this && otherCard.classList.contains('expanded')) {
+              otherCard.classList.remove('expanded');
+            }
+          });
+        });
+      });
+
       // Translation System
       const translations = {
         en: {
           pageTitle: "Nina Monteiro - Doula",
           name: "Nina Monteiro",
           subtitle: "Doula",
-          tagline: "Support Through Pregnancy, Birth & Beyond",
-          description: "Welcome. My name is Nina Monteiro, and I am a certified, full-spectrum doula offering compassionate support to mothers and families.",
+          tagline: "Support for Pregnant People and Families",
+          description: "Welcome! I am a doula and perinatal educator. I offer support to pregnant people and families in the first moments with a newborn.",
           ctaButton: "Get In Touch",
           
           // Section headers
@@ -1208,38 +1570,47 @@
           contactTitle: "Get in Touch",
           
           // About section
-          aboutText1: "As a certified full-spectrum doula, I believe in the power of informed choice and compassionate care throughout your pregnancy journey. My approach centers on creating a safe, supportive environment where you feel empowered to make decisions that align with your values and birth preferences.",
-          aboutText2: "I provide evidence-based information, emotional support, and advocacy to help you navigate this transformative time with confidence. Whether you're planning a hospital birth, home birth, or anything in between, I'm here to support your unique path to parenthood.",
+          aboutText1: "As a doula, I believe in the power of well-informed choice and affectionate care during your pregnancy. My approach focuses on creating a safe and supportive environment where you feel empowered to make decisions aligned with your values and birth preferences.",
+          aboutText2: "I provide up-to-date, evidence-based information, emotional support, and active listening to help you navigate this transformative moment with confidence. Whether you're planning a hospital birth or home birth, I'm here to support your journey to parenthood.",
           
           // Services
-          service1Title: "Birth Support",
-          service1Text: "Continuous emotional, physical, and informational support during labor and delivery. I help create a calm, supportive environment while advocating for your birth preferences.",
-          service2Title: "Prenatal Education",
-          service2Text: "Comprehensive childbirth education, birth planning sessions, and resources to help you prepare for your birthing experience with confidence and knowledge.",
-          service3Title: "Postpartum Care",
-          service3Text: "Support during the fourth trimester including newborn care guidance, emotional support, and resources for your recovery and adjustment to parenthood.",
-          service4Title: "Lactation Support",
-          service4Text: "Guidance and support for breastfeeding success, including proper latch techniques, positioning, and troubleshooting common challenges.",
+          service1Title: "Pregnancy+Birth Package",
+          service1Preview: "Complete support during pregnancy and birth, with personalized meetings to understand your wishes and align expectations.",
+          service1Text: "A package of meetings during pregnancy to get to know each other better, understand your birth wishes, and align expectations. We can create a package that suits you best, but the basic plan includes 4 meetings during pregnancy, birth accompaniment, and one postpartum meeting.",
+          service2Title: "Doula+ Package",
+          service2Preview: "Complete postpartum support, including household care, food, and breastfeeding support.",
+          service2Text: "Varied services aimed at comprehensive postpartum support. I'll be your support network so you can focus on caring for your baby and yourself. I'll help with household care, food, companionship, and hygiene for you and your baby in these first moments. I also offer breastfeeding support if desired, and guidance to specialized professionals when necessary.",
+          service3Title: "LGBTQIA+ Families",
+          service3Preview: "Inclusive services for all families, with special attention to LGBTQIA+ needs.",
+          service3Text: "My services are available to anyone who is pregnant and/or adopting, with attentive and careful support for LGBTQIA+ families. Within my scope, I offer support to trans people who wish to give birth and breastfeed, with an updated perspective on each family's particularities, also with referrals to specialized professionals when necessary.",
+          service4Title: "Solidarity Doula",
+          service4Preview: "Accessible support for Black, Indigenous, or low-income women.",
+          service4Text: "If you are a Black, Indigenous, or low-income woman and would like support for any of the above services, please contact me as we offer services at symbolic prices.",
+          service5Title: "Doula|Club",
+          service5Preview: "Guidance and support for groups of up to 5 people, promoting experience sharing.",
+          service5Text: "Guidance and support services for groups of up to 5 people. A different experience where exchange and group dynamics are the foundation of the service, but with clear guidance and a keen eye.",
+          servicesNote: "*All packages include support and accompaniment via WhatsApp directly with me, or with discussion groups in the case of Doula|Club.",
+          readMore: "Learn More",
           
           // Resources
-          resource1Title: "Evidence-Based Care",
-          resource1Text: "Research and studies supporting informed decision-making during pregnancy and birth.",
-          resource1Link: "Learn More →",
-          resource2Title: "Birth Preferences",
-          resource2Text: "Tools and resources to help you articulate your birth wishes and preferences.",
-          resource2Link: "Create Your Plan →",
-          resource3Title: "Comfort Measures",
-          resource3Text: "Natural pain management techniques and comfort strategies for labor.",
-          resource3Link: "Explore Techniques →",
-          resource4Title: "Partner Preparation",
-          resource4Text: "Guidance for partners on how to provide meaningful support during birth.",
-          resource4Link: "Support Guide →",
-          resource5Title: "Newborn Care",
-          resource5Text: "Essential information about caring for your newborn in the early days and weeks.",
-          resource5Link: "Care Guide →",
-          resource6Title: "Community",
-          resource6Text: "Connect with other families and find local support networks.",
-          resource6Link: "Find Support →",
+          resource1Title: "Educational Video: Birth Preparation",
+          resource1Text: "Important information about the birth process for a calmer and more conscious experience.",
+          resource1Link: "Watch on YouTube →",
+          resource2Title: "Video: Care and Support",
+          resource2Text: "Educational content about the role of a doula and the importance of support during pregnancy and birth.",
+          resource2Link: "Watch on YouTube →",
+          resource3Title: "Study: Perineal Lacerations in Brazil",
+          resource3Text: "Scientific research on factors associated with perineal laceration perception, with data from the Nascer no Brasil survey.",
+          resource3Link: "Read Article →",
+          resource4Title: "Nascer no Brasil Research",
+          resource4Text: "Executive summary of the largest research on birth and delivery conducted in Brazil, with important data on obstetric care.",
+          resource4Link: "Download PDF →",
+          resource5Title: "Birth Plan",
+          resource5Text: "Guidance for building your birth plan, expressing your preferences and wishes for the moment of birth.",
+          resource5Link: "Let's Talk →",
+          resource6Title: "Support Network",
+          resource6Text: "Contact us to learn about our network of partner professionals and pregnancy and parenting support groups.",
+          resource6Link: "Learn More →",
           
           // Contact form
           formNameLabel: "Full Name",
@@ -1250,79 +1621,26 @@
           formMessageLabel: "How can I support you?",
           formMessagePlaceholder: "Tell me about your needs, due date, birth preferences, or any questions you have...",
           formSubmitButton: "Send Message",
+          formSending: "Sending...",
+          formSuccess: "Message Sent!",
+          formError: "Error! Please try again.",
           
           // Footer
-          footerText: "© 2025 Nina Monteiro. All rights reserved."
-        },
-        pt: {
-          pageTitle: "Nina Monteiro - Doula",
-          name: "Nina Monteiro",
-          subtitle: "Doula",
-          tagline: "Apoio Durante a Gravidez, Parto e Além",
-          description: "Bem-vinda. Meu nome é Nina Monteiro, e sou uma doula certificada de espectro completo, oferecendo apoio compassivo a mães e famílias.",
-          ctaButton: "Entre em Contato",
+          footerText: "© 2025 Nina Monteiro. All rights reserved.",
+          developerCredit: "Developed with",
+          developerCreditBy: "by",
           
-          // Section headers
-          aboutTitle: "Sobre Mim",
-          servicesTitle: "Serviços Oferecidos",
-          resourcesTitle: "Recursos Úteis",
-          contactTitle: "Entre em Contato",
-          
-          // About section
-          aboutText1: "Como doula certificada de espectro completo, acredito no poder da escolha informada e do cuidado compassivo durante toda a sua jornada de gravidez. Minha abordagem se concentra em criar um ambiente seguro e de apoio onde você se sinta empoderada para tomar decisões alinhadas com seus valores e preferências de parto.",
-          aboutText2: "Forneço informações baseadas em evidências, apoio emocional e defesa para ajudá-la a navegar neste momento transformador com confiança. Seja planejando um parto hospitalar, parto domiciliar ou qualquer coisa intermediária, estou aqui para apoiar seu caminho único para a maternidade.",
-          
-          // Services
-          service1Title: "Apoio ao Parto",
-          service1Text: "Apoio emocional, físico e informacional contínuo durante o trabalho de parto e nascimento. Ajudo a criar um ambiente calmo e de apoio enquanto defendo suas preferências de parto.",
-          service2Title: "Educação Pré-natal",
-          service2Text: "Educação abrangente sobre o parto, sessões de planejamento do nascimento e recursos para ajudá-la a se preparar para sua experiência de parto com confiança e conhecimento.",
-          service3Title: "Cuidados Pós-parto",
-          service3Text: "Apoio durante o quarto trimestre, incluindo orientação sobre cuidados com o recém-nascido, apoio emocional e recursos para sua recuperação e adaptação à maternidade.",
-          service4Title: "Apoio à Amamentação",
-          service4Text: "Orientação e apoio para o sucesso da amamentação, incluindo técnicas adequadas de pega, posicionamento e resolução de desafios comuns.",
-          
-          // Resources
-          resource1Title: "Cuidados Baseados em Evidências",
-          resource1Text: "Pesquisas e estudos que apoiam a tomada de decisões informadas durante a gravidez e o parto.",
-          resource1Link: "Saiba Mais →",
-          resource2Title: "Preferências de Parto",
-          resource2Text: "Ferramentas e recursos para ajudá-la a articular seus desejos e preferências de parto.",
-          resource2Link: "Crie Seu Plano →",
-          resource3Title: "Medidas de Conforto",
-          resource3Text: "Técnicas naturais de manejo da dor e estratégias de conforto para o trabalho de parto.",
-          resource3Link: "Explore Técnicas →",
-          resource4Title: "Preparação do Parceiro",
-          resource4Text: "Orientação para parceiros sobre como fornecer apoio significativo durante o parto.",
-          resource4Link: "Guia de Apoio →",
-          resource5Title: "Cuidados com o Recém-nascido",
-          resource5Text: "Informações essenciais sobre o cuidado do seu recém-nascido nos primeiros dias e semanas.",
-          resource5Link: "Guia de Cuidados →",
-          resource6Title: "Comunidade",
-          resource6Text: "Conecte-se com outras famílias e encontre redes de apoio locais.",
-          resource6Link: "Encontre Apoio →",
-          
-          // Contact form
-          formNameLabel: "Nome Completo",
-          formNamePlaceholder: "Seu nome completo",
-          formEmailLabel: "Endereço de E-mail",
-          formEmailPlaceholder: "seu.email@exemplo.com",
-          formDueDateLabel: "Data Prevista do Parto (Opcional)",
-          formMessageLabel: "Como posso apoiá-la?",
-          formMessagePlaceholder: "Conte-me sobre suas necessidades, data prevista, preferências de parto ou quaisquer perguntas que você tenha...",
-          formSubmitButton: "Enviar Mensagem",
-          
-          // Footer
-          footerText: "© 2025 Nina Monteiro. Todos os direitos reservados."
+          // Back to top
+          backToTopLabel: "Back to top"
         }
       };
 
       // Get current language from localStorage or default to 'pt'
       let currentLang = localStorage.getItem('selectedLanguage') || 'pt';
 
-      // Function to update all text content
-      function updateContent(lang) {
-        const t = translations[lang];
+      // Function to update content to English when EN is selected
+      function updateToEnglish() {
+        const t = translations.en;
         
         // Update page title
         document.title = t.pageTitle;
@@ -1342,41 +1660,74 @@
         document.querySelector('.contact h2').textContent = t.contactTitle;
         
         // Update about section
-        const aboutParagraphs = document.querySelectorAll('.about-content p');
+        const aboutParagraphs = document.querySelectorAll('.about-text p');
         aboutParagraphs[0].textContent = t.aboutText1;
         aboutParagraphs[1].textContent = t.aboutText2;
         
         // Update services
         const serviceCards = document.querySelectorAll('.service-card');
-        serviceCards[0].querySelector('h3').textContent = t.service1Title;
-        serviceCards[0].querySelector('p').textContent = t.service1Text;
-        serviceCards[1].querySelector('h3').textContent = t.service2Title;
-        serviceCards[1].querySelector('p').textContent = t.service2Text;
-        serviceCards[2].querySelector('h3').textContent = t.service3Title;
-        serviceCards[2].querySelector('p').textContent = t.service3Text;
-        serviceCards[3].querySelector('h3').textContent = t.service4Title;
-        serviceCards[3].querySelector('p').textContent = t.service4Text;
+        
+        // Update service card 1
+        serviceCards[0].querySelector('h3').firstChild.textContent = t.service1Title + ' ';
+        serviceCards[0].querySelector('.service-preview').textContent = t.service1Preview;
+        serviceCards[0].querySelector('.service-full').textContent = t.service1Text;
+        serviceCards[0].querySelector('.read-more').textContent = t.readMore;
+        
+        // Update service card 2
+        serviceCards[1].querySelector('h3').firstChild.textContent = t.service2Title + ' ';
+        serviceCards[1].querySelector('.service-preview').textContent = t.service2Preview;
+        serviceCards[1].querySelector('.service-full').textContent = t.service2Text;
+        serviceCards[1].querySelector('.read-more').textContent = t.readMore;
+        
+        // Update service card 3
+        serviceCards[2].querySelector('h3').firstChild.textContent = t.service3Title + ' ';
+        serviceCards[2].querySelector('.service-preview').textContent = t.service3Preview;
+        serviceCards[2].querySelector('.service-full').textContent = t.service3Text;
+        serviceCards[2].querySelector('.read-more').textContent = t.readMore;
+        
+        // Update service card 4
+        serviceCards[3].querySelector('h3').firstChild.textContent = t.service4Title + ' ';
+        serviceCards[3].querySelector('.service-preview').textContent = t.service4Preview;
+        serviceCards[3].querySelector('.service-full').textContent = t.service4Text;
+        serviceCards[3].querySelector('.read-more').textContent = t.readMore;
+        
+        // Update service card 5
+        if (serviceCards[4]) {
+          serviceCards[4].querySelector('h3').firstChild.textContent = t.service5Title + ' ';
+          serviceCards[4].querySelector('.service-preview').textContent = t.service5Preview;
+          serviceCards[4].querySelector('.service-full').textContent = t.service5Text;
+          serviceCards[4].querySelector('.read-more').textContent = t.readMore;
+        }
+        
+        // Update services note
+        const servicesSection = document.querySelector('.services .container');
+        const servicesNote = servicesSection.querySelector('p[style*="text-align: center"]');
+        if (servicesNote) {
+          servicesNote.textContent = t.servicesNote;
+        }
         
         // Update resources
         const resourceCards = document.querySelectorAll('.resource-card');
-        resourceCards[0].querySelector('h3').textContent = t.resource1Title;
-        resourceCards[0].querySelector('p').textContent = t.resource1Text;
-        resourceCards[0].querySelector('a').textContent = t.resource1Link;
-        resourceCards[1].querySelector('h3').textContent = t.resource2Title;
-        resourceCards[1].querySelector('p').textContent = t.resource2Text;
-        resourceCards[1].querySelector('a').textContent = t.resource2Link;
-        resourceCards[2].querySelector('h3').textContent = t.resource3Title;
-        resourceCards[2].querySelector('p').textContent = t.resource3Text;
-        resourceCards[2].querySelector('a').textContent = t.resource3Link;
-        resourceCards[3].querySelector('h3').textContent = t.resource4Title;
-        resourceCards[3].querySelector('p').textContent = t.resource4Text;
-        resourceCards[3].querySelector('a').textContent = t.resource4Link;
-        resourceCards[4].querySelector('h3').textContent = t.resource5Title;
-        resourceCards[4].querySelector('p').textContent = t.resource5Text;
-        resourceCards[4].querySelector('a').textContent = t.resource5Link;
-        resourceCards[5].querySelector('h3').textContent = t.resource6Title;
-        resourceCards[5].querySelector('p').textContent = t.resource6Text;
-        resourceCards[5].querySelector('a').textContent = t.resource6Link;
+        if (resourceCards.length >= 6) {
+          resourceCards[0].querySelector('h3').textContent = t.resource1Title;
+          resourceCards[0].querySelector('p').textContent = t.resource1Text;
+          resourceCards[0].querySelector('a').textContent = t.resource1Link;
+          resourceCards[1].querySelector('h3').textContent = t.resource2Title;
+          resourceCards[1].querySelector('p').textContent = t.resource2Text;
+          resourceCards[1].querySelector('a').textContent = t.resource2Link;
+          resourceCards[2].querySelector('h3').textContent = t.resource3Title;
+          resourceCards[2].querySelector('p').textContent = t.resource3Text;
+          resourceCards[2].querySelector('a').textContent = t.resource3Link;
+          resourceCards[3].querySelector('h3').textContent = t.resource4Title;
+          resourceCards[3].querySelector('p').textContent = t.resource4Text;
+          resourceCards[3].querySelector('a').textContent = t.resource4Link;
+          resourceCards[4].querySelector('h3').textContent = t.resource5Title;
+          resourceCards[4].querySelector('p').textContent = t.resource5Text;
+          resourceCards[4].querySelector('a').textContent = t.resource5Link;
+          resourceCards[5].querySelector('h3').textContent = t.resource6Title;
+          resourceCards[5].querySelector('p').textContent = t.resource6Text;
+          resourceCards[5].querySelector('a').textContent = t.resource6Link;
+        }
         
         // Update contact form
         const form = document.getElementById('contactForm');
@@ -1392,6 +1743,29 @@
         // Update footer
         document.querySelector('footer p').textContent = t.footerText;
         
+        // Update developer credit
+        const developerCredit = document.querySelector('.developer-credit');
+        if (developerCredit) {
+          const creditTexts = developerCredit.querySelectorAll('.credit-text');
+          creditTexts[0].textContent = t.developerCredit;
+          creditTexts[1].textContent = t.developerCreditBy;
+        }
+        
+        // Update back to top button
+        document.getElementById('backToTop').setAttribute('aria-label', t.backToTopLabel);
+        
+        // Update HTML lang attribute
+        document.documentElement.lang = 'en';
+      }
+
+      // Function to restore Portuguese (default content)
+      function restorePortuguese() {
+        // Reload the page to restore the original Portuguese content
+        location.reload();
+      }
+
+      // Function to handle language change
+      function changeLanguage(lang) {
         // Update active language button
         document.querySelectorAll('.lang-btn').forEach(btn => {
           btn.classList.remove('active');
@@ -1403,16 +1777,37 @@
         // Store language preference
         localStorage.setItem('selectedLanguage', lang);
         currentLang = lang;
+        
+        // Apply language changes
+        if (lang === 'en') {
+          updateToEnglish();
+        } else {
+          // If switching back to Portuguese and currently in English, reload the page
+          if (document.documentElement.lang === 'en') {
+            restorePortuguese();
+          }
+        }
       }
 
-      // Initialize with current language
-      updateContent(currentLang);
+      // Initialize language on page load
+      if (currentLang === 'en') {
+        // Apply English translations immediately
+        updateToEnglish();
+      }
+      
+      // Update active button based on current language
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.lang === currentLang) {
+          btn.classList.add('active');
+        }
+      });
 
       // Add language toggle event listeners
       document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.addEventListener('click', function() {
           const selectedLang = this.dataset.lang;
-          updateContent(selectedLang);
+          changeLanguage(selectedLang);
         });
       });
 
@@ -1435,22 +1830,6 @@
           behavior: 'smooth'
         });
       });
-      
-      // Update button aria-label based on language
-      function updateBackToTopLabel(lang) {
-        const label = lang === 'pt' ? 'Voltar ao topo' : 'Back to top';
-        backToTopButton.setAttribute('aria-label', label);
-      }
-      
-      // Add to the updateContent function
-      const originalUpdateContent = updateContent;
-      updateContent = function(lang) {
-        originalUpdateContent(lang);
-        updateBackToTopLabel(lang);
-      };
-      
-      // Initialize label with current language
-      updateBackToTopLabel(currentLang);
     </script>
   </body>
 </html>
