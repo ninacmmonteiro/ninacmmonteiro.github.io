@@ -936,6 +936,13 @@
         fill: currentColor;
       }
       
+      .social-link img {
+        width: 30px;
+        height: 30px;
+        fill: currentColor;
+        object-fit: contain;
+      }
+      
       @media (max-width: 768px) {
         .social-links {
           gap: 15px;
@@ -946,7 +953,8 @@
           height: 35px;
         }
         
-        .social-link svg {
+        .social-link svg,
+        .social-link img {
           width: 18px;
           height: 18px;
         }
